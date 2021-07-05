@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="NovacomData" xmlns=""
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="NovacomData">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="AssetData" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AssetData">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Customer"/>
+				<xs:element ref="Date"/>
+				<xs:element ref="Asset"/>
+				<xs:element ref="Measure"  minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Customer">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="id" type="xs:string" use="required" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Date">
+		<xs:complexType>
+			<xs:attribute name="Date" type="xs:string" use="required" />
+			<xs:attribute name="Time" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Asset">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="id" type="xs:string" use="required" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Measure">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Field" type="xs:string" />
+				<xs:element name="Value" type="xs:string" minOccurs="0" />
+				<xs:element name="Unit" type="xs:string" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

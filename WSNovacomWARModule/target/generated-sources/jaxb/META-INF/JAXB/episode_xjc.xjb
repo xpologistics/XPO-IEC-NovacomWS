@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.2 
+Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+Généré le : 2021.07.02 à 02:24:21 PM CEST 
+
+  -->
+  <jaxb:bindings scd="x-schema::">
+    <jaxb:schemaBindings map="false">
+      <jaxb:package name="com.xpo.novacom.pojo"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings scd="NovacomData">
+      <jaxb:class ref="com.xpo.novacom.pojo.NovacomData"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="AssetData">
+      <jaxb:class ref="com.xpo.novacom.pojo.AssetData"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="Customer">
+      <jaxb:class ref="com.xpo.novacom.pojo.Customer"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="Date">
+      <jaxb:class ref="com.xpo.novacom.pojo.Date"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="Asset">
+      <jaxb:class ref="com.xpo.novacom.pojo.Asset"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="Measure">
+      <jaxb:class ref="com.xpo.novacom.pojo.Measure"/>
+    </jaxb:bindings>
+  </jaxb:bindings>
+</jaxb:bindings>
+

@@ -1,0 +1,16 @@
+com\xpo\novacom\pojo\Measure.class
+com\xpo\novacom\utils\InternalException.class
+com\xpo\novacom\pojo\Asset.class
+com\xpo\novacom\pojo\NovacomData.class
+com\xpo\novacom\servlets\NovacomServlet.class
+com\xpo\novacom\utils\HazelcastNode$Holder.class
+com\xpo\novacom\utils\ParcCache$Holder.class
+com\xpo\novacom\utils\Utils.class
+com\xpo\novacom\utils\ParcCache.class
+com\xpo\novacom\pojo\Customer.class
+com\xpo\novacom\utils\HazelcastNode$1.class
+com\xpo\novacom\utils\ParcCache$1.class
+com\xpo\novacom\pojo\Date.class
+com\xpo\novacom\pojo\ObjectFactory.class
+com\xpo\novacom\pojo\AssetData.class
+com\xpo\novacom\utils\HazelcastNode.class
