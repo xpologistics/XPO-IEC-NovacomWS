@@ -10,7 +10,9 @@ com\xpo\novacom\utils\ParcCache.class
 com\xpo\novacom\pojo\Customer.class
 com\xpo\novacom\utils\HazelcastNode$1.class
 com\xpo\novacom\utils\ParcCache$1.class
+com\xpo\novacom\utils\ConfigurationUtils.class
 com\xpo\novacom\pojo\Date.class
 com\xpo\novacom\pojo\ObjectFactory.class
 com\xpo\novacom\pojo\AssetData.class
+com\xpo\novacom\utils\FWKNDIEnvironment.class
 com\xpo\novacom\utils\HazelcastNode.class

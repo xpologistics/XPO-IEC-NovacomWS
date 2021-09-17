@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+    
+    <!-- Active les annotations @Autowired des beans -->
+	<context:annotation-config />
+    
+    <!-- <context:property-placeholder location="classpath:/database.properties" /> -->
+    <context:component-scan base-package="com.xpo" />
+    <!-- Charge dans le context les beans portant les annotations @Component, @Service, @Repository, ... -->
+    <context:component-scan base-package="com.ndi">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+    </context:component-scan>
+    <bean id="datasourceParcUnique" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass">
+            <value>com.ibm.as400.access.AS400JDBCDriver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${ds.parcunique.url}</value>
+        </property>
+        <property name="user">
+            <value>${ds.parcunique.user}</value>
+        </property>
+        <property name="password">
+            <value>${ds.parcunique.password}</value>
+        </property>
+        <property name="minPoolSize">
+            <value>${ds.parcunique.minpoolsize}</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>${ds.parcunique.maxpoolsize}</value>
+        </property>
+        <property name="autoCommitOnClose">
+            <value>false</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>${ds.parcunique.minpoolsize}</value>
+        </property>
+        <property name="maxIdleTime">
+            <value>60</value>
+        </property>
+        <property name="testConnectionOnCheckout">
+            <value>false</value>
+        </property>
+        <property name="preferredTestQuery">
+            <value>SELECT 1 from dual</value>
+        </property>
+    </bean>
+    <bean id="jdbcTemplateParcUnique" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasourceParcUnique" />
+    </bean>
+
+    <bean id="datasourceMwIecOracle" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass">
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${ds.mwiec.url}</value>
+        </property>
+        <property name="user">
+            <value>${ds.mwiec.user}</value>
+        </property>
+        <property name="password">
+            <value>${ds.mwiec.password}</value>
+        </property>
+        <property name="minPoolSize">
+            <value>${ds.mwiec.minpoolsize}</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>${ds.mwiec.maxpoolsize}</value>
+        </property>
+        <property name="autoCommitOnClose">
+            <value>false</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>${ds.mwiec.minpoolsize}</value>
+        </property>
+        <property name="maxIdleTime">
+            <value>60</value>
+        </property>
+        <property name="testConnectionOnCheckout">
+            <value>true</value>
+        </property>
+        <property name="preferredTestQuery">
+            <value>SELECT 1 from dual</value>
+        </property>
+    </bean>
+    <bean id="jdbcTemplateMwIecOracle" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasourceMwIecOracle" />
+    </bean>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
+    <!-- Loading of files config for the application -->
+	<!-- Initialisation log4j -->
+	<bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<bean id="com.xpo.novacom.utils.ConfigurationUtils.LOG4J_PROPERTIES_PATH"  class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Charge le fichier des properties pour être utiliser dans la conf xml -->
+	<bean id="confNovacom" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="location">
+	        <bean class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+                <property name="staticField" value="com.xpo.novacom.utils.ConfigurationUtils.WS_NOVACOM_CONF_URL_FILE"/>
+            </bean>
+    	</property>
+	</bean>
+
+	<bean id="webServiceFactoryProps"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <bean class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+                	<property name="staticField" value="com.xpo.novacom.utils.ConfigurationUtils.WS_NOVACOM_CONF_URL_FILE"/>
+            	</bean>
+            </list>
+        </property>
+    </bean>
+</beans>

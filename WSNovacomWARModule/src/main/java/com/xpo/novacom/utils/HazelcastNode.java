@@ -1,7 +1,10 @@
 package com.xpo.novacom.utils;
 
+import java.io.FileNotFoundException;
+
 import com.hazelcast.config.ClasspathXmlConfig;
 import com.hazelcast.config.Config;
+import com.hazelcast.config.FileSystemXmlConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
@@ -13,7 +16,13 @@ public class HazelcastNode {
 
 	// Pattern Singleton Thread Safe and Lazy
 	private HazelcastNode() {
-		new ClasspathXmlConfig("webnovacom-hazelcast.xml");
+		//new ClasspathXmlConfig(ConfigurationUtils.HAZELCAST_CONF_URL_FILE);
+		try {
+			new FileSystemXmlConfig(ConfigurationUtils.HAZELCAST_CONF_URL_FILE);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.cache = Hazelcast.newHazelcastInstance();
 
 	}

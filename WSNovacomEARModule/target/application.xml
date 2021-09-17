@@ -3,10 +3,11 @@
 	"-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN"
 	"http://java.sun.com/dtd/application_1_3.dtd">
 <application>
-  <display-name>WSNovacomEARModule</display-name>
+  <display-name>WS_NovacomEar</display-name>
+  <description>All Project Object Models inherit from this base Super POM</description>
   <module>
     <web>
-      <web-uri>WSNovacomWARModule-0.0.1-SNAPSHOT.war</web-uri>
+      <web-uri>WSNovacom.war</web-uri>
       <context-root>/WSNovacomWARModule</context-root>
     </web>
   </module>

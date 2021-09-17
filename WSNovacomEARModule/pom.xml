@@ -7,6 +7,33 @@
   </parent>
   <artifactId>WSNovacomEARModule</artifactId>
   <packaging>ear</packaging>
+  
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<generateApplicationXml>true</generateApplicationXml>
+					<displayName>WS_NovacomEar</displayName>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<modules>
+						<webModule>
+							<groupId>WSNovacom</groupId>
+							<artifactId>WSNovacomWARModule</artifactId>
+							<bundleFileName>WSNovacom.war</bundleFileName>
+							<contextRoot>/WSNovacomWARModule</contextRoot>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
   <dependencies>
   	<dependency>
   		<groupId>WSNovacom</groupId>

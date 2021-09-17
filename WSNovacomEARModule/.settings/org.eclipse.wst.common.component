@@ -2,7 +2,7 @@
     <wb-module deploy-name="WSNovacomEARModule-0.0.1-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="WSNovacomWARModule-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/WSNovacomWARModule/WSNovacomWARModule">
+        <dependent-module archiveName="WSNovacom.war" deploy-path="/" handle="module:/resource/WSNovacomWARModule/WSNovacomWARModule">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

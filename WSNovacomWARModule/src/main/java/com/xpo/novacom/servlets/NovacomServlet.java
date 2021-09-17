@@ -20,6 +20,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -33,13 +35,14 @@ import com.xpo.novacom.pojo.NovacomData;
 import com.xpo.novacom.utils.*;
 
 @Component
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 public class NovacomServlet extends HttpServlet {
-    private Logger log = LoggerFactory.getLogger("novacom");;
+    private Logger log = LoggerFactory.getLogger("novacom");
     private static final String FOURNISSEUR_NOVACOM_LIB = "NOVACOM";
     private static final String FOURNISSEUR_NOVACOM_LIB_COURT = "NOVA";
 
     @Autowired
-    private ParcUniqueDao parcUniqueDao;
+    ParcUniqueDao parcUniqueDao;
 
     @Autowired
     GpsService gpsService;
@@ -89,23 +92,23 @@ public class NovacomServlet extends HttpServlet {
                 String venumCache = ParcCache.getInstance().getVenum(Utils.toImmatRech(immat));
                 if (venumCache != null) {
 
-                    log.debug("Venum trouvé en cache");
+                    log.debug("Venum trouvï¿½ en cache");
                     vehicule.setImmat(immat);
                     vehicule.setVenum(venumCache);
                     vehicule.setVenser(venumCache);
                 } else {
                     //Rien dans le cache, on cherche en BDD
-                    log.debug("Venum non trouvé en cache, on cherche en base");
+                    log.debug("Venum non trouvï¿½ en cache, on cherche en base");
                     vehicule = parcUniqueDao.getVehicule(Utils.toImmatRech(immat));
                     log.debug(vehicule.getImmat() + vehicule.getVenum() + vehicule.getVenser());
-                    //On met à jour le cache
+                    //On met ï¿½ jour le cache
                     ParcCache.getInstance().setVenum(immat, vehicule.getVenum());
                 }
 
 
                 if (vehicule == null) {
-                    this.log.error("Venum nom trouvé pour immat : " + immat);
-                    this.log.error("Flux d'entréé : " + assetData.toString());
+                    log.error("Venum nom trouvï¿½ pour immat : " + immat);
+                    log.error("Flux d'entrï¿½ï¿½ : " + assetData.toString());
                 } else {
 
 
@@ -144,16 +147,12 @@ public class NovacomServlet extends HttpServlet {
 
                     this.log.debug("Fin appel Generic Worker GPS");
 
-                    //Si ce n'est pas encore un equipement embarqué IEC on demande un ajout
-                    log.debug("Vérification dans si immat dans IEC");
+                    //Si ce n'est pas encore un equipement embarquï¿½ IEC on demande un ajout
+                    log.debug("Vï¿½rification dans si immat dans IEC");
                     gpsService.verifImmatDansIEC(vehicule, FOURNISSEUR_NOVACOM_LIB_COURT, FOURNISSEUR_NOVACOM_LIB);
                 }
 
-
             }
-
-
-
 
         } catch (final Exception e) {
             throw new InternalException("Cannot create GPS Message on Generic Worker", e);

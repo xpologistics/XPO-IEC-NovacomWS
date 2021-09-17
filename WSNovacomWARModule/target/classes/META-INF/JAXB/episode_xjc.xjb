@@ -5,7 +5,7 @@
 Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.3.2 
 Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-Généré le : 2021.07.02 à 02:24:21 PM CEST 
+Généré le : 2021.09.17 à 08:32:20 AM CEST 
 
   -->
   <jaxb:bindings scd="x-schema::">

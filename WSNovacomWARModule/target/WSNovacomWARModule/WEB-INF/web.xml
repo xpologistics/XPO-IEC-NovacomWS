@@ -4,10 +4,14 @@
 
 <web-app>
   <display-name>Web Novacom</display-name>
-  
+  <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-context.xml</param-value>
+  </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  	
   <servlet>
     <servlet-name>NovacomServlet</servlet-name>
     <servlet-class>com.xpo.novacom.servlets.NovacomServlet</servlet-class>
